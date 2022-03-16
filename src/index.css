@@ -1,28 +1,27 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.active{
-  color:rgba(150, 141, 141, 0.377);
+.active {
+  color: rgba(150, 141, 141, 0.377);
 }
 
 .none {
   display: none;
 }
 
-
 .sidenav {
-  width: 130px;
+  width: 200px;
   position: fixed;
   z-index: 99;
   top: 100px;
@@ -30,30 +29,41 @@ code {
   background: transparent;
   overflow-x: hidden;
   padding: 8px 0;
+  overflow: hidden;
 }
 
 .sidenav button {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 25px;
-  color: #ccc;
+  font-size: 20px;
+  color: #fff;
   display: block;
+  border: transparent;
 }
 
 .sidenav button:hover {
-  text-decoration: underline;
+  text-decoration: burlywood;
+  font-size: 25px;
   background-color: transparent;
   color: beige;
-  border-color:#ccc ;
+  border-color: #ccc;
 }
 
 .sidenav button:focus,
 .sidenav button:active {
-  background-color: aliceblue;
+  color: #ccc;
+  border-color: transparent;
 }
 
-
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+.hr {
+  border-top: 5px solid rgb(219, 218, 214);
 }
