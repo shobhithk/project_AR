@@ -31,7 +31,7 @@ const TourPlannellum = (props) => {
       {props.isComplete && <Pannellum
         ref={panImage}
         width="100%"
-        height="95.5vh"
+        height="94.7vh"
         image={props.imageData.image_link}
         pitch={10}
         yaw={180}
@@ -89,6 +89,7 @@ const TourPlannellum = (props) => {
           );
         })}
       </Pannellum>}
+      {}
     </>
   );
 };

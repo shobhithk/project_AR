@@ -50,7 +50,7 @@ function PannellumLink(props) {
       <Pannellum
         ref={panImage}
         width="100%"
-        height="600px"
+        height="84.5vh"
         image={props.imageData.image_link}
         pitch={10}
         yaw={180}

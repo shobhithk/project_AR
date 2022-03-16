@@ -52,7 +52,7 @@ code {
 .sidenav button:focus,
 .sidenav button:active {
   color: #ccc;
-  border-color: transparent;
+  border-color: #ccc;
 }
 
 @media screen and (max-height: 450px) {

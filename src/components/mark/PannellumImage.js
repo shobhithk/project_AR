@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 import InputName from "./InputName";
 import styles from "./PannellumImage.module.css";
 import { useHistory } from "react-router-dom";
-import '../index.css'
+import '../../index.css'
 
 const PannellumImage = (props) => {
   const [yaw, setYaw] = useState(0);
@@ -57,7 +57,7 @@ const PannellumImage = (props) => {
       <Pannellum
         ref={panImage}
         width="100%"
-        height="87.5vh"
+        height="84.5vh"
         image={props.imageData.image_link} //props.imageData.image_link
         pitch={10}
         yaw={180}

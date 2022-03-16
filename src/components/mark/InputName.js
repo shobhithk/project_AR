@@ -1,5 +1,5 @@
 import React from "react";
-import useInput from "../Hooks/use-input";
+import useInput from "../../Hooks/use-input";
 
 const InputName = (props) => {
   const {
