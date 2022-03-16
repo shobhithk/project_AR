@@ -11,3 +11,49 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.active{
+  color:rgba(150, 141, 141, 0.377);
+}
+
+.none {
+  display: none;
+}
+
+
+.sidenav {
+  width: 130px;
+  position: fixed;
+  z-index: 99;
+  top: 100px;
+  right: 100px;
+  background: transparent;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+.sidenav button {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #ccc;
+  display: block;
+}
+
+.sidenav button:hover {
+  text-decoration: underline;
+  background-color: transparent;
+  color: beige;
+  border-color:#ccc ;
+}
+
+.sidenav button:focus,
+.sidenav button:active {
+  background-color: aliceblue;
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import ImageHandle from "./components/ImageHandle";
+import { Switch, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import ListImages from './components/Linking/ListImages'
+import FetchImageDetails from "./components/Linking/FetchImageDetails";
+import GetImages from "./components/Tour/GetImages";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <Switch>
+        <Route exact path="/mark">
+          <ListImages />
+        </Route>
+        <Route exact path="/mark/:id">
+          <ImageHandle />
+        </Route>
+        <Route exact path="/link">
+          <ListImages />
+        </Route>
+        <Route exact path="/tour">
+          <GetImages />
+        </Route>
+        <Route exact path="/link/:id">
+          <FetchImageDetails/>
+        </Route>
+      </Switch>
+    </>
   );
 }
 
