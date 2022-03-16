@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef} from "react";
 import { Pannellum } from "pannellum-react";
 import axios from "axios";
 import SideHeader from "./SideHeader";
-import pano from '../../Assets/Images/pano.jpg'
+
 
 const TourPlannellum = (props) => {
   const [yaw, setYaw] = useState(0);
@@ -20,8 +20,6 @@ const TourPlannellum = (props) => {
   for (const num of coArray) {
     counts[num] = 0;
   }
-
-  
 
   return (
     <>
