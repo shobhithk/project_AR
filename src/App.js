@@ -1,5 +1,5 @@
 import "./App.css";
-import ImageHandle from "./components/ImageHandle";
+import ImageHandle from "./components/mark/ImageHandle";
 import { Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ListImages from './components/Linking/ListImages'
