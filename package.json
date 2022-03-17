@@ -7,6 +7,7 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
+    "compress.js": "^1.2.2",
     "i": "^0.3.7",
     "npm": "^8.5.4",
     "pannellum-react": "^1.2.4",

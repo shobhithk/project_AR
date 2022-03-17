@@ -29,7 +29,7 @@ function ListImages(props) {
       <>
         {imageState &&
           Object.keys(imageState).map((key, i) => (
-            <DisplayImageList key={i} imageId={key} mark={false}>
+            <DisplayImageList key={i} imageId={key} mark={false} >
               {imageState[key]}
             </DisplayImageList>
           ))}

@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import ListImages from './components/Linking/ListImages'
 import FetchImageDetails from "./components/Linking/FetchImageDetails";
 import GetImages from "./components/Tour/GetImages";
+import VirtualTour from "./components/Tour/VirtualTour";
 
 function App() {
   return (
@@ -20,7 +21,10 @@ function App() {
         <Route exact path="/link">
           <ListImages />
         </Route>
-        <Route exact path="/tour">
+        <Route exact path="/:vid" >
+          <VirtualTour />
+        </Route>
+        <Route exact path="/:vid/tour">
           <GetImages />
         </Route>
         <Route exact path="/link/:id">

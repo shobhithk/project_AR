@@ -32,7 +32,7 @@ export default function Navbar() {
           <NavLink className={styles.items} activeClassName="active" to="/link">
             Linking
           </NavLink>
-          <NavLink className={styles.items} activeClassName="active" to="/tour">
+          <NavLink className={styles.items} activeClassName="active" to="/virtualtour">
             VTOUR
           </NavLink>
         </ul>
