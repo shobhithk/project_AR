@@ -21,7 +21,7 @@ const TourPlannellum = (props) => {
     counts[num] = 0;
   }
 
-  return props.isOk ? (
+  return props.isOk? (
     <>
       <SideHeader
         images={props.images}

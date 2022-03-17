@@ -53,11 +53,14 @@ code {
 .sidenav button:active {
   color: #ccc;
   border-color: #ccc;
+  border: none;
+  background-color: transparent;
 }
 
-@media screen and (max-height: 450px) {
+@media screen and (max-width: 600px) {
   .sidenav {
-    padding-top: 15px;
+    right:20px;
+    top:20px;
   }
   .sidenav a {
     font-size: 18px;

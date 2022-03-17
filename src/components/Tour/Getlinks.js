@@ -7,7 +7,7 @@ const Getlinks = (props) => {
   const [linkState, setLinkState] = useState();
   const [imageState, setImageState] = useState();
   const [imageId, setImageId] = useState(Object.keys(props.imageData)[0]);
-  const [isComplete, setIsComplete] = useState(true);
+  const [isComplete, setIsComplete] = useState(false);
   const [isOk, setIsOk] = useState(false);
 
   const fetchLinkHandler = useCallback(async () => {
@@ -35,7 +35,8 @@ const Getlinks = (props) => {
       );
 
       setEmbedState(response.data);
-      setIsComplete(true);
+      if (window.innerWidth < 780) setIsComplete(false);
+      else setIsComplete(true);
     } catch (error) {
       console.log(error.message);
     }
@@ -52,6 +53,8 @@ const Getlinks = (props) => {
 
       console.log(response.data);
       setImageState(response.data);
+      if(window.innerWidth<780)
+        setIsComplete(true)
       setIsOk(true);
     } catch (error) {
       console.log(error.message);

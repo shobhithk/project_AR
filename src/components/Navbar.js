@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -32,7 +32,7 @@ export default function Navbar() {
           <NavLink className={styles.items} activeClassName="active" to="/link">
             Linking
           </NavLink>
-          <NavLink className={styles.items} activeClassName="active" to="/virtualtour">
+          <NavLink className={styles.items} activeClassName="active" to="/vid">
             VTOUR
           </NavLink>
         </ul>
