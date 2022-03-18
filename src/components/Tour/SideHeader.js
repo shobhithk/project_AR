@@ -10,7 +10,10 @@ const SideHeader = (props) => {
               type="button"
               key={index}
               className="btn btn-link"
-              onClick={() => props.changeImage(key)}
+              onClick={() => {
+                props.changeImage(key)
+                props.setIsOk(false)
+              }}
             >
               {props.images[key]}
             </button>

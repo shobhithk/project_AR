@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef,useState } from "react";
 import { Pannellum } from "pannellum-react";
 import axios from "axios";
 import SideHeader from "./SideHeader";
@@ -12,6 +12,7 @@ const TourPlannellum = (props) => {
   const co_ordinates = props.embedData.co_ordinates;
 
   const coArray = Object.keys(co_ordinates);
+  const allKeys = Object.keys(co_ordinates)
 
   const counts = {};
   coArray.map((key, index) => {
@@ -24,6 +25,7 @@ const TourPlannellum = (props) => {
   return props.isOk? (
     <>
       <SideHeader
+        setIsOk = {props.setIsOk}
         images={props.images}
         imageData={props.imageData}
         changeImage={props.changeImage}
@@ -88,6 +90,9 @@ const TourPlannellum = (props) => {
   ) : (
     <LoadingSpinner />
   );
+  {allKeys.forEach(element => {
+    
+  });}
 };
 
 export default TourPlannellum;
