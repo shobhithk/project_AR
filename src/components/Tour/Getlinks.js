@@ -7,7 +7,7 @@ const Getlinks = (props) => {
   const [linkState, setLinkState] = useState();
   const [imageState, setImageState] = useState();
   const [imageId, setImageId] = useState(Object.keys(props.imageData)[0]);
-  const [isComplete, setIsComplete] = useState(false);
+  const [isComplete, setIsComplete] = useState(true);
   const [isOk, setIsOk] = useState(false);
 
   const fetchLinkHandler = useCallback(async () => {
@@ -19,7 +19,7 @@ const Getlinks = (props) => {
         }
       );
       setLinkState(response.data);
-      setIsOk(true);
+     
     } catch (error) {
       console.log(error.message);
     }
