@@ -16,6 +16,7 @@ const Getlinks = (props) => {
     try {
       const imgRes = localStorage.getItem(imageId);
       if (imgRes && window.innerWidth > 780) {
+        console.log(window.innerWidth)
         console.log("inside desktop view,accessing local storage ");
         const result = JSON.parse(imgRes);
         const imgUrl = result.link;
@@ -23,6 +24,7 @@ const Getlinks = (props) => {
         setLinkState({ image_link: imgUrl });
         setIsOk(true);
       } else if (window.innerWidth > 780) {
+        
         console.log("inside desktop view fetching image link");
         const response = await axios.get(
           "http://54.164.240.76:8000/get_image_link",
@@ -71,6 +73,7 @@ const Getlinks = (props) => {
   const fetchImageHandler = useCallback(async () => {
     const imgRes = localStorage.getItem(imageId);
     try {
+      console.log(window.innerWidth)
       if (imgRes && window.innerWidth <= 780) {
         console.log("inside mobile view,accessing local storage ");
         const result = JSON.parse(imgRes);
