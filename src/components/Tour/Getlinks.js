@@ -15,14 +15,16 @@ const Getlinks = (props) => {
   const fetchLinkHandler = useCallback(async () => {
     try {
       const imgRes = localStorage.getItem(imageId);
-      if (imgRes && window.innerWidth >= 780) {
+      if (imgRes && window.innerWidth > 780) {
+        console.log(window.innerWidth)
         console.log("inside desktop view,accessing local storage ");
         const result = JSON.parse(imgRes);
         const imgUrl = result.link;
         console.log("localstorage");
         setLinkState({ image_link: imgUrl });
         setIsOk(true);
-      } else if (window.innerWidth >= 780) {
+      } else if (window.innerWidth > 780) {
+        
         console.log("inside desktop view fetching image link");
         const response = await axios.get(
           "http://54.164.240.76:8000/get_image_link",
@@ -61,7 +63,7 @@ const Getlinks = (props) => {
         setEmbedState(response.data);
       }
 
-      if (window.innerWidth < 780) setIsComplete(false);
+      if (window.innerWidth <= 780) setIsComplete(false);
       else setIsComplete(true);
     } catch (error) {
       console.log(error.message);
@@ -71,7 +73,8 @@ const Getlinks = (props) => {
   const fetchImageHandler = useCallback(async () => {
     const imgRes = localStorage.getItem(imageId);
     try {
-      if (imgRes && window.innerWidth < 780) {
+      console.log(window.innerWidth)
+      if (imgRes && window.innerWidth <= 780) {
         console.log("inside mobile view,accessing local storage ");
         const result = JSON.parse(imgRes);
         const imgUrl = result.link;
@@ -79,16 +82,16 @@ const Getlinks = (props) => {
         console.log(imgUrl);
         setImageState(imgUrl);
         console.log("imageState has been set");
-        if (window.innerWidth < 780) setIsComplete(true);
+        if (window.innerWidth <= 780) setIsComplete(true);
         console.log("nhgvfjhgfjhg");
         setIsOk(true);
-      } else if (window.innerWidth < 780) {
+      } else if (window.innerWidth <= 780) {
         console.log("inside mobile view,fetching ");
         const response = await axios({
           method: "get",
-          url: "http://54.164.240.76:8000/get_image_file",
+          url: "http://54.164.240.76:8000/get_image_file1",
           responseType: "blob",
-          params: { image_id: imageId },
+          params: { image_id: imageId,mobile_view: true },
         });
 
         console.log(response.data);
