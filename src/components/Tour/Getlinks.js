@@ -89,9 +89,9 @@ const Getlinks = (props) => {
         console.log("inside mobile view,fetching ");
         const response = await axios({
           method: "get",
-          url: "http://54.164.240.76:8000/get_image_file",
+          url: "http://54.164.240.76:8000/get_image_file1",
           responseType: "blob",
-          params: { image_id: imageId },
+          params: { image_id: imageId,mobile_view: true },
         });
 
         console.log(response.data);
