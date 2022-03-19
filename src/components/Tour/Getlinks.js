@@ -1,25 +1,40 @@
 import React, { useState, useEffect, useCallback } from "react";
 import TourPlannellum from "./TourPlannellum";
 import axios from "axios";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const Getlinks = (props) => {
   const [embedState, setEmbedState] = useState();
   const [linkState, setLinkState] = useState();
   const [imageState, setImageState] = useState();
+
   const [imageId, setImageId] = useState(Object.keys(props.imageData)[0]);
-  const [isComplete, setIsComplete] = useState(true);
+  const [isComplete, setIsComplete] = useState(false);
   const [isOk, setIsOk] = useState(false);
 
   const fetchLinkHandler = useCallback(async () => {
     try {
-      const response = await axios.get(
-        "http://54.164.240.76:8000/get_image_link",
-        {
-          params: { image_id: imageId },
-        }
-      );
-      setLinkState(response.data);
-     
+      const imgRes = localStorage.getItem(imageId);
+      if (imgRes && window.innerWidth >= 780) {
+        console.log("inside desktop view,accessing local storage ");
+        const result = JSON.parse(imgRes);
+        const imgUrl = result.link;
+        console.log("localstorage");
+        setLinkState({ image_link: imgUrl });
+        setIsOk(true);
+      } else if (window.innerWidth >= 780) {
+        console.log("inside desktop view fetching image link");
+        const response = await axios.get(
+          "http://54.164.240.76:8000/get_image_link",
+          {
+            params: { image_id: imageId },
+          }
+        );
+        setLinkState(response.data);
+        setIsOk(true);
+      } else {
+        setLinkState(null);
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -27,14 +42,25 @@ const Getlinks = (props) => {
 
   const fetchEmbedHandler = useCallback(async () => {
     try {
-      const response = await axios.get(
-        "http://54.164.240.76:8000/get_embeddings",
-        {
-          params: { image_id: imageId },
-        }
-      );
+      const imgRes = localStorage.getItem(imageId);
+      if (imgRes) {
+        console.log("inside  embeddings accessing local storage ");
+        console.log("fetch embedding");
+        const result = JSON.parse(imgRes);
+        const imgCord = result.data;
+        console.log("localstorage");
+        setEmbedState(imgCord);
+      } else {
+        console.log("inside embeddings,fetching");
+        const response = await axios.get(
+          "http://54.164.240.76:8000/get_embeddings",
+          {
+            params: { image_id: imageId },
+          }
+        );
+        setEmbedState(response.data);
+      }
 
-      setEmbedState(response.data);
       if (window.innerWidth < 780) setIsComplete(false);
       else setIsComplete(true);
     } catch (error) {
@@ -43,19 +69,35 @@ const Getlinks = (props) => {
   }, [imageId]);
 
   const fetchImageHandler = useCallback(async () => {
+    const imgRes = localStorage.getItem(imageId);
     try {
-      const response = await axios({
-        method: "get",
-        url: "http://54.164.240.76:8000/get_image_file",
-        responseType: "blob",
-        params: { image_id: imageId },
-      });
+      if (imgRes && window.innerWidth < 780) {
+        console.log("inside mobile view,accessing local storage ");
+        const result = JSON.parse(imgRes);
+        const imgUrl = result.link;
+        console.log("localstorage");
+        console.log(imgUrl);
+        setImageState(imgUrl);
+        console.log("imageState has been set");
+        if (window.innerWidth < 780) setIsComplete(true);
+        console.log("nhgvfjhgfjhg");
+        setIsOk(true);
+      } else if (window.innerWidth < 780) {
+        console.log("inside mobile view,fetching ");
+        const response = await axios({
+          method: "get",
+          url: "http://54.164.240.76:8000/get_image_file",
+          responseType: "blob",
+          params: { image_id: imageId },
+        });
 
-      console.log(response.data);
-      setImageState(response.data);
-      if(window.innerWidth<780)
-        setIsComplete(true)
-      setIsOk(true);
+        console.log(response.data);
+        const blobUrl = window.URL.createObjectURL(new Blob([response.data]));
+        setImageState(blobUrl);
+
+        if (window.innerWidth < 780) setIsComplete(true);
+        setIsOk(true);
+      } else setImageState(null);
     } catch (error) {
       console.log(error.message);
     }
@@ -71,7 +113,7 @@ const Getlinks = (props) => {
 
   return (
     <>
-      {embedState && linkState && imageState && (
+      {embedState && (linkState || imageState) && isOk ? (
         <TourPlannellum
           imageData={linkState}
           images={props.imageData}
@@ -82,7 +124,10 @@ const Getlinks = (props) => {
           mobileImage={imageState}
           isOk={isOk}
           setIsOk={setIsOk}
+          imageId={imageId}
         />
+      ) : (
+        <LoadingSpinner />
       )}
     </>
   );

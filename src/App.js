@@ -8,6 +8,10 @@ import GetImages from "./components/Tour/GetImages";
 import VirtualName from "./components/Tour/VirtualName";
 
 function App() {
+  window.onbeforeunload = function() {
+    localStorage.clear();
+    return '';
+  };
   return (
     <>
       <Navbar />

@@ -4,20 +4,21 @@ const SideHeader = (props) => {
   return (
     <div className="sidenav">
       {Object.keys(props.images).map(function (key, index) {
-        return key != props.imageData.image_id ? (
+        return key != props.imageId ? (
           <>
             <button
               type="button"
               key={index}
               className="btn btn-link"
               onClick={() => {
-                props.changeImage(key)
-                props.setIsOk(false)
+                props.changeImage(key);
+                props.setIsOk(false);
+                props.setIsComplete(false);
               }}
             >
               {props.images[key]}
             </button>
-            <hr className="hr"/>
+            <hr className="hr" />
           </>
         ) : (
           <div className="none" key={index}></div>

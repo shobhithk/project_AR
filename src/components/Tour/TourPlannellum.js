@@ -1,20 +1,19 @@
-import React, { useRef,useState } from "react";
+import React, { useRef, useEffect, useCallback, useMemo } from "react";
 import { Pannellum } from "pannellum-react";
 import axios from "axios";
 import SideHeader from "./SideHeader";
-import LoadingSpinner from "../UI/LoadingSpinner";
+import styles from "./TourPlannellum.module.css";
 
 const TourPlannellum = (props) => {
-  const blobUrl = window.URL.createObjectURL(new Blob([props.mobileImage]));
-  console.log(blobUrl)
-
+  let imgObj = {};
   const panImage = useRef(null);
   const co_ordinates = props.embedData.co_ordinates;
 
   const coArray = Object.keys(co_ordinates);
-  const allKeys = Object.keys(co_ordinates)
+  const allKeys = Object.keys(co_ordinates);
 
   const counts = {};
+
   coArray.map((key, index) => {
     coArray.push(key);
   });
@@ -22,12 +21,61 @@ const TourPlannellum = (props) => {
     counts[num] = 0;
   }
 
-  return props.isOk? (
+  const getLinkingImages = useCallback(async (embedId) => {
+    const response = await axios.get(
+      "http://54.164.240.76:8000/get_linking_image",
+      {
+        params: {
+          embedding_id: embedId,
+        },
+      }
+    );
+    const response2 = await axios({
+      method: "get",
+      url: "http://54.164.240.76:8000/get_image_file1",
+      responseType: "blob",
+      params: {
+        image_id: response.data.image_id,
+        mobile_view: window.innerWidth < 780 ? true : false,
+      },
+    });
+
+    const response3 = await axios.get(
+      "http://54.164.240.76:8000/get_embeddings",
+      {
+        params: { image_id: response.data.image_id },
+      }
+    );
+    console.log("fetched" + response.data.image_id);
+    return {
+      link: window.URL.createObjectURL(new Blob([response2.data])),
+      data: response3.data,
+      imageId: response.data.image_id,
+    };
+  }, []);
+
+  useEffect(() => {
+    allKeys.map((element) => {
+      const nextImages = async (key) => {
+        const url = localStorage.getItem(key);
+        if (!url) {
+          let a = await getLinkingImages(element);
+          let b = { link: a.link, data: a.data };
+          b = JSON.stringify(b);
+          localStorage.setItem(a.imageId, b);
+          console.log("this is imageFile");
+        }
+      };
+      nextImages(element);
+    });
+  }, []);
+
+  return (
     <>
       <SideHeader
-        setIsOk = {props.setIsOk}
+        setIsOk={props.setIsOk}
         images={props.images}
-        imageData={props.imageData}
+        imageId={props.imageId}
         changeImage={props.changeImage}
       />
       {props.isComplete && (
@@ -35,12 +83,17 @@ const TourPlannellum = (props) => {
           ref={panImage}
           width="100%"
           height="94.7vh"
-          image={window.innerWidth < 780 ? blobUrl : props.imageData.image_link} //imageResult ? imageResult : props.imageData.image_link
+          image={
+            window.innerWidth < 780
+              ? props.mobileImage
+              : props.imageData.image_link
+          } //imageResult ? imageResult : props.imageData.image_link
           pitch={10}
           yaw={180}
-          hfov={500}
+          hfov={window.innerWidth < 780 ? 100 : 500}
           autoLoad
           draggable
+          cssClass={styles["custom-hotspot"]}
           keyboardZoom
           mouseZoom
           orientationOnByDefault={false}
@@ -55,12 +108,12 @@ const TourPlannellum = (props) => {
                 pitch={
                   counts[key] === 1
                     ? +co_ordinates[key].y
-                    : +co_ordinates[key].y + 7
+                    : +co_ordinates[key].y + 3
                 }
                 yaw={
                   counts[key] === 1
                     ? +co_ordinates[key].x
-                    : +co_ordinates[key].x + 7
+                    : +co_ordinates[key].x + 3
                 }
                 text={co_ordinates[key].coordinate_name}
                 handleClick={async (evt, args) => {
@@ -74,7 +127,8 @@ const TourPlannellum = (props) => {
                       }
                     );
                     props.setIsComplete(false);
-                    props.setIsOk(false)
+                    props.setIsOk(false);
+
                     props.changeImage(response.data.image_id);
                   } catch (err) {
                     console.error(err);
@@ -87,12 +141,7 @@ const TourPlannellum = (props) => {
         </Pannellum>
       )}
     </>
-  ) : (
-    <LoadingSpinner />
   );
-  {allKeys.forEach(element => {
-    
-  });}
 };
 
 export default TourPlannellum;

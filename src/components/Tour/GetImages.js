@@ -7,6 +7,20 @@ const GetImages = (props) => {
 
     const params = useParams()
     const [imageState,setImageState] = useState()
+
+    useEffect(()=>{
+      const interval = setInterval(()=>{
+        Object.keys(imageState).map((imageId)=>{
+          if(localStorage.getItem(imageId)){
+            localStorage.removeItem(imageId)
+          }
+        })
+      }, 240000);
+     return () => clearInterval(interval);
+    })
+    
+
+
     const fetchImageHandler = useCallback(async () => {
         try {
           const response = await axios.get("http://54.164.240.76:8000/get_images", {
