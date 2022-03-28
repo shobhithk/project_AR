@@ -1,11 +1,11 @@
-import React, { useRef, useEffect, useCallback, useMemo } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { Pannellum } from "pannellum-react";
 import axios from "axios";
 import SideHeader from "./SideHeader";
 import styles from "./TourPlannellum.module.css";
+import GetMapData from "./PlanTour/GetMapData";
 
 const TourPlannellum = (props) => {
-  let imgObj = {};
   const panImage = useRef(null);
   const co_ordinates = props.embedData.co_ordinates;
 
@@ -72,8 +72,16 @@ const TourPlannellum = (props) => {
 
   return (
     <>
+      <GetMapData
+        vid={props.vid}
+        imageId={props.imageId}
+        changeImage={props.changeImage}
+        setIsOk={props.setIsOk}
+        setIsComplete={props.setIsComplete}
+      />
       <SideHeader
         setIsOk={props.setIsOk}
+        setIsComplete={props.setIsComplete}
         images={props.images}
         imageId={props.imageId}
         changeImage={props.changeImage}
@@ -90,7 +98,7 @@ const TourPlannellum = (props) => {
           } //imageResult ? imageResult : props.imageData.image_link
           pitch={10}
           yaw={180}
-          hfov={window.innerWidth < 780 ? 100 : 500}
+          hfov={window.innerWidth < 780 ? 100 : 100}
           autoLoad
           draggable
           cssClass={styles["custom-hotspot"]}
@@ -98,6 +106,8 @@ const TourPlannellum = (props) => {
           mouseZoom
           orientationOnByDefault={false}
           showZoomCtrl={false}
+          compass={true}
+          autoRotate={1}
         >
           {coArray.map(function (key, index) {
             counts[key] = counts[key] + 1;

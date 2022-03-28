@@ -6,6 +6,11 @@ import ListImages from './components/Linking/ListImages'
 import FetchImageDetails from "./components/Linking/FetchImageDetails";
 import GetImages from "./components/Tour/GetImages";
 import VirtualName from "./components/Tour/VirtualName";
+import InitPlan from "./components/Plan/InitPlan";
+import GetVid from "./components/Plan/GetVid";
+import ChoosePlan from "./components/Plan/ChoosePlan";
+import LinkPlan from "./components/Plan/LinkPlan";
+import Images from "./components/images";
 
 function App() {
   window.onbeforeunload = function() {
@@ -28,11 +33,26 @@ function App() {
         <Route exact path="/vid" >
           <VirtualName />
         </Route>
-        <Route exact path="/:vid/tour">
+        <Route exact path="/:vid_name/tour">
           <GetImages />
         </Route>
         <Route exact path="/link/:id">
           <FetchImageDetails/>
+        </Route>
+        <Route exact path='/plan'>
+          <GetVid />
+        </Route>
+        <Route exact path='/:vid/plan'>
+          <ChoosePlan/>
+        </Route>
+        <Route exact path='/:vid/planmark'>
+          <InitPlan />
+        </Route>
+        <Route exact path='/:vid/planlink'>
+          <LinkPlan/>
+        </Route>
+        <Route exact path='/test'>
+          <Images/>
         </Route>
       </Switch>
     </>

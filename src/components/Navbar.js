@@ -35,6 +35,9 @@ export default function Navbar() {
           <NavLink className={styles.items} activeClassName="active" to="/vid">
             VTOUR
           </NavLink>
+          <NavLink className={styles.items} activeClassName="active" to="/plan">
+            plan
+          </NavLink>
         </ul>
       )}
       <button onClick={toggleNav} className={styles.btn}>

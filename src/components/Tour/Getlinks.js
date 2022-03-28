@@ -128,6 +128,7 @@ const Getlinks = (props) => {
           isOk={isOk}
           setIsOk={setIsOk}
           imageId={imageId}
+          vid={props.vid}
         />
       ) : (
         <LoadingSpinner />

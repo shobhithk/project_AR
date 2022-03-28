@@ -4,22 +4,21 @@ const SideHeader = (props) => {
   return (
     <div className="sidenav">
       {Object.keys(props.images).map(function (key, index) {
-        return key != props.imageId ? (
-          <>
+        return key !== props.imageId ? (
+          <React.Fragment key={index}>
             <button
               type="button"
-              key={index}
               className="btn btn-link"
               onClick={() => {
-                props.changeImage(key);
                 props.setIsOk(false);
                 props.setIsComplete(false);
+                props.changeImage(key);
               }}
             >
               {props.images[key]}
             </button>
             <hr className="hr" />
-          </>
+          </React.Fragment>
         ) : (
           <div className="none" key={index}></div>
         );

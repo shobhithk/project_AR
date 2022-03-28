@@ -164,5 +164,24 @@ button:disabled:active {
   
 }
 
+.info {
+  position:absolute;
+  left: 5px;
+  top:35px;
+  border: 10px #fff;
+  background-color: #fff;
+}
 
 
+img.img-mapper-img{
+  box-shadow: 3px 3px 2px #413a3a;
+ 
+}
+
+.min-max {
+  position: absolute;
+  top:25px;
+  left:5px;
+  z-index: 10;
+  
+}
