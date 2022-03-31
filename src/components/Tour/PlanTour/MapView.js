@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import ImageMapper from "react-img-mapper";
 import axios from "axios";
-import { Button } from "@material-ui/core";
+import { Button, Fab } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
@@ -69,7 +69,7 @@ const MapView = (props) => {
     }
   };
 
-  const buttonSize = pWidth === 250 ? "small" : "medium";
+  const buttonSize = (pWidth === 250) ? "small" : "medium";
 
   const displayPlusHandler = () => {
     if (pWidth === 250) {
@@ -93,22 +93,23 @@ const MapView = (props) => {
   return (
     <>
       <div className="info">
-        {pWidth!==500 &&  <Button
+        {pWidth!==500 &&  <Fab
           size={buttonSize}
-          color="secondary"
-          className="min-max"
+          color="primary"
+          className="min-max-1"
           onClick={displayPlusHandler}
         >
+         
           <FontAwesomeIcon icon={faPlus} />
-        </Button>}
-        {display && <Button
+        </Fab>}
+        {display && <Fab
           size={buttonSize}
-          color="secondary"
-          className="min-max"
+          color="primary"
+          className="min-max-2"
           onClick={displayMinusHandler}
         >
           <FontAwesomeIcon icon={faMinus} />
-        </Button>}
+        </Fab>}
         {pos && display && (
           <ImageMapper
             src={props.planLink.plan_link}

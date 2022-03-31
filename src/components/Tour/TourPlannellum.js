@@ -72,13 +72,13 @@ const TourPlannellum = (props) => {
 
   return (
     <>
-      <GetMapData
+     {window.innerWidth>780 && <GetMapData
         vid={props.vid}
         imageId={props.imageId}
         changeImage={props.changeImage}
         setIsOk={props.setIsOk}
         setIsComplete={props.setIsComplete}
-      />
+      />}
       <SideHeader
         setIsOk={props.setIsOk}
         setIsComplete={props.setIsComplete}

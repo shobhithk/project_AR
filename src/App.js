@@ -11,6 +11,10 @@ import GetVid from "./components/Plan/GetVid";
 import ChoosePlan from "./components/Plan/ChoosePlan";
 import LinkPlan from "./components/Plan/LinkPlan";
 import Images from "./components/images";
+import ChooseUpload from "./components/Upload/ChooseUpload";
+import UploadPano from "./components/Upload/UploadPano";
+import UploadPlan from "./components/Upload/UploadPlan";
+import Select from "./components/Upload/Select";
 
 function App() {
   window.onbeforeunload = function() {
@@ -53,6 +57,18 @@ function App() {
         </Route>
         <Route exact path='/test'>
           <Images/>
+        </Route>
+        <Route exact path='/upload'>
+          <ChooseUpload/>
+        </Route>
+        <Route exact path='/:vid/select'>
+          <Select/>
+        </Route>
+        <Route exact path='/:vid/uploadimage'>
+          <UploadPano/>
+        </Route>
+        <Route exact path='/:vid/uploadplan'>
+          <UploadPlan/>
         </Route>
       </Switch>
     </>
