@@ -11,7 +11,12 @@ const MapView = (props) => {
   const [pos, setPos] = useState();
   const [pWidth, setPWidth] = useState(250);
   const [display, setDisplay] = useState(true);
+  const [link,setLink] = useState(null)
+
   console.log(props);
+  if(!link){
+    setLink(props.planLink.plan_link)
+  }
 
   const imageMap = useCallback(async () => {
     try {
@@ -112,7 +117,7 @@ const MapView = (props) => {
         </Fab>}
         {pos && display && (
           <ImageMapper
-            src={props.planLink.plan_link}
+            src={link}
             onClick={(event) => {
               linkClickHandler(event.id);
             }}

@@ -17,7 +17,7 @@ const SideHeader = (props) => {
             >
               {props.images[key]}
             </button>
-            <hr className="hr" />
+         
           </React.Fragment>
         ) : (
           <div className="none" key={index}></div>

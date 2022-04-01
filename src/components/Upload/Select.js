@@ -8,11 +8,11 @@ const Select = () => {
     const history = useHistory()
     
     const planUpload = ()=>{
-        history.push(`/${params.vid}/uploadimage`)
+        history.push(`/${params.vid}/uploadplan`)
     }   
 
     const imageUpload = ()=>{
-        history.push(`/${params.vid}/uploadplan`)
+        history.push(`/${params.vid}/uploadimage`)
     }
 
   return (

@@ -90,7 +90,7 @@ const TourPlannellum = (props) => {
         <Pannellum
           ref={panImage}
           width="100%"
-          height="94.7vh"
+          height="95.2vh"
           image={
             window.innerWidth < 780
               ? props.mobileImage

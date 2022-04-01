@@ -21,11 +21,11 @@ code {
 }
 
 .sidenav {
-  width: 100px;
+  width: 150px;
   position: fixed;
   z-index: 99;
   top: 100px;
-  right: 100px;
+  right: 60px;
   background: transparent;
   overflow-x: hidden;
   padding: 8px 0;
@@ -35,7 +35,7 @@ code {
 .sidenav button {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 10px;
+  font-size: 12px;
   color: #fff;
   display: block;
   border: transparent;
@@ -64,6 +64,7 @@ code {
   }
   .sidenav a {
     font-size: 18px;
+
   }
 }
 
