@@ -1,13 +1,13 @@
 .area {
   position: absolute;
-  top: 4em;
-  left: 16em;
+  top: 3.7em;
+  left: 16.5em;
   z-index: 6;
 }
 
 .grp {
   position: absolute;
-  top: 6em;
+  top: 5.8em;
   left: 16em;
   z-index: 6;
 }
@@ -31,19 +31,19 @@
 
 @media screen and (max-width: 780px) {
   .area {
-    top: 2em;
-    left: 1em;
+    top: 8.5em;
+    left: 0.6em;
   }
 
   .grp {
-    top: 4.6em;
-    left: 1.2em;
+    top: 12.7em;
+    left: 0.7em;
     font-size: 0.8em;
   }
 
   .grp2 {
-    top: 4.6em;
-    left: 7em;
+    top: 12.7em;
+    left: 6.7em;
   }
 
   .grp2 span {

@@ -38,7 +38,7 @@ const TourPlannellum = (props) => {
       responseType: "blob",
       params: {
         image_id: response.data.image_id,
-        mobile_view: window.innerWidth < 780 ? true : false,
+        mobile_view: isMobile ? true : false,
       },
     });
 
@@ -73,15 +73,15 @@ const TourPlannellum = (props) => {
   }, []);
 
   return (
-    <div style={{"position":"relative"}}>
-     {!isMobile && <GetMapData
+    <div style={{ position: "relative" }}>
+      <GetMapData
         vid={props.vid}
         imageId={props.imageId}
         changeImage={props.changeImage}
         setIsOk={props.setIsOk}
         setIsComplete={props.setIsComplete}
-      />}
-      <GetAmenities vid={props.vid}/>
+      />
+      <GetAmenities vid={props.vid} />
       <SideHeader
         setIsOk={props.setIsOk}
         setIsComplete={props.setIsComplete}
@@ -93,15 +93,11 @@ const TourPlannellum = (props) => {
         <Pannellum
           ref={panImage}
           width="100%"
-          height={isMobile?"100vh":"95.3vh"}
-          image={
-            window.innerWidth < 780
-              ? props.mobileImage
-              : props.imageData.image_link
-          } //imageResult ? imageResult : props.imageData.image_link
+          height={isMobile ? "100vh" : "95.2vh"}
+          image={isMobile ? props.mobileImage : props.imageData.image_link} //imageResult ? imageResult : props.imageData.image_link
           pitch={10}
           yaw={180}
-          hfov={window.innerWidth < 780 ? 100 : 100}
+          hfov={isMobile ? 100 : 100}
           autoLoad
           draggable
           cssClass={styles["custom-hotspot"]}

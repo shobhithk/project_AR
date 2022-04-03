@@ -1,6 +1,8 @@
 import React, { useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import MapView from "./MapView";
+import { isMobile } from "react-device-detect";
+import MobileMap from "./MobileMap";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const GetMapData = (props) => {
@@ -38,17 +40,32 @@ const GetMapData = (props) => {
   return (
     <>
       {isTrue ? (
-        linkState &&
-        embedState && (
-          <MapView
-            planLink={linkState}
-            planEmbed={embedState}
-            vid={props.vid}
-            imageId={props.imageId}
-            setImageId={props.changeImage}
-            setIsOk={props.setIsOk}
-            setIsComplete={props.setIsComplete}
-          />
+        !isMobile ? (
+          linkState &&
+          embedState && (
+            <MapView
+              planLink={linkState}
+              planEmbed={embedState}
+              vid={props.vid}
+              imageId={props.imageId}
+              setImageId={props.changeImage}
+              setIsOk={props.setIsOk}
+              setIsComplete={props.setIsComplete}
+            />
+          )
+        ) : (
+          linkState &&
+          embedState && (
+            <MobileMap
+              planLink={linkState}
+              planEmbed={embedState}
+              vid={props.vid}
+              imageId={props.imageId}
+              setImageId={props.changeImage}
+              setIsOk={props.setIsOk}
+              setIsComplete={props.setIsComplete}
+            />
+          )
         )
       ) : (
         <LoadingSpinner />
