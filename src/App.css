@@ -167,9 +167,11 @@ button:disabled:active {
 .info {
   position:absolute;
   left: 5px;
-  top:35px;
+  top:15px;
   border: 10px #fff;
   background-color: #fff;
+  z-index: 10;
+  background-color: transparent;
 }
 
 
