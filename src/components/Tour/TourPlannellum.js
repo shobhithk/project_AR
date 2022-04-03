@@ -4,6 +4,8 @@ import axios from "axios";
 import SideHeader from "./SideHeader";
 import styles from "./TourPlannellum.module.css";
 import GetMapData from "./PlanTour/GetMapData";
+import GetAmenities from "./Amenities/GetAmenities";
+import { isMobile } from "react-device-detect";
 
 const TourPlannellum = (props) => {
   const panImage = useRef(null);
@@ -71,14 +73,15 @@ const TourPlannellum = (props) => {
   }, []);
 
   return (
-    <>
-     {window.innerWidth>780 && <GetMapData
+    <div style={{"position":"relative"}}>
+     {!isMobile && <GetMapData
         vid={props.vid}
         imageId={props.imageId}
         changeImage={props.changeImage}
         setIsOk={props.setIsOk}
         setIsComplete={props.setIsComplete}
       />}
+      <GetAmenities vid={props.vid}/>
       <SideHeader
         setIsOk={props.setIsOk}
         setIsComplete={props.setIsComplete}
@@ -90,7 +93,7 @@ const TourPlannellum = (props) => {
         <Pannellum
           ref={panImage}
           width="100%"
-          height="95.2vh"
+          height={isMobile?"100vh":"95.3vh"}
           image={
             window.innerWidth < 780
               ? props.mobileImage
@@ -107,7 +110,7 @@ const TourPlannellum = (props) => {
           orientationOnByDefault={false}
           showZoomCtrl={false}
           compass={true}
-          autoRotate={1}
+          autoRotate={10}
         >
           {coArray.map(function (key, index) {
             counts[key] = counts[key] + 1;
@@ -150,7 +153,7 @@ const TourPlannellum = (props) => {
           })}
         </Pannellum>
       )}
-    </>
+    </div>
   );
 };
 

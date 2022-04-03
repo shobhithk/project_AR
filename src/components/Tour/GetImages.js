@@ -11,16 +11,16 @@ const GetImages = (props) => {
     console.log(vid)
     const [imageState,setImageState] = useState()
 
-    useEffect(()=>{
-      const interval = setInterval(()=>{
-        Object.keys(imageState).map((imageId)=>{
-          if(localStorage.getItem(imageId)){
-            localStorage.removeItem(imageId)
-          }
-        })
-      }, 120000);
-     return () => clearInterval(interval);
-    })
+    // useEffect(()=>{
+    //   const interval = setInterval(()=>{
+    //     Object.keys(imageState).map((imageId)=>{
+    //       if(localStorage.getItem(imageId)){
+    //         localStorage.removeItem(imageId)
+    //       }
+    //     })
+    //   }, 120000);
+    //  return () => clearInterval(interval);
+    // })
     
 
 

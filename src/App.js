@@ -1,3 +1,4 @@
+import React,{useEffect} from "react";
 import "./App.css";
 import ImageHandle from "./components/mark/ImageHandle";
 import { Switch, Route } from "react-router-dom";
@@ -15,12 +16,16 @@ import ChooseUpload from "./components/Upload/ChooseUpload";
 import UploadPano from "./components/Upload/UploadPano";
 import UploadPlan from "./components/Upload/UploadPlan";
 import Select from "./components/Upload/Select";
+import {isMobile} from 'react-device-detect'
 
 function App() {
   window.onbeforeunload = function() {
     localStorage.clear();
     return '';
   };
+
+
+
   return (
     <>
       <Navbar />
