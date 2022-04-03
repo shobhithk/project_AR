@@ -29,7 +29,7 @@
   font-size: 0.9em;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 900px)  {
   .area {
     top: 8.5em;
     left: 0.6em;
