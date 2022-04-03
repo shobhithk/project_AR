@@ -1,15 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import ImageMapper from "react-img-mapper";
 import axios from "axios";
-import { Button, Fab } from "@material-ui/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import "../../../App.css";
 
-const MapView = (props) => {
+const MobileMap = (props) => {
   const [pos, setPos] = useState();
-  const [pWidth, setPWidth] = useState(250);
+  const [pWidth, setPWidth] = useState(100);
   const [display, setDisplay] = useState(true);
   const [link,setLink] = useState(null)
 
@@ -46,7 +42,7 @@ const MapView = (props) => {
       id: key,
       name: co_ordinates[key].coordinate_name,
       shape: "circle",
-      coords: [co_ordinates[key].x, co_ordinates[key].y, 20],
+      coords: [co_ordinates[key].x, co_ordinates[key].y, 15],
       preFillColor: key === pos ? "#FF1818" : "#fff",
     };
     mapData.areas.push(desc);
@@ -74,47 +70,11 @@ const MapView = (props) => {
     }
   };
 
-  const buttonSize = (pWidth === 250) ? "small" : "medium";
-
-  const displayPlusHandler = () => {
-    if (pWidth === 250) {
-      setPWidth(500);
-    }
-    if (!display) {
-      setDisplay(true);
-      setPWidth(250);
-    }
-  };
-
-  const displayMinusHandler = () => {
-    if (pWidth === 250) {
-      setDisplay(false);
-    }
-    if (pWidth === 500) {
-      setPWidth(250);
-    }
-  };
 
   return (
     <>
-      <div className="info">
-        {pWidth!==500 &&  <Fab
-          size={buttonSize}
-          color="primary"
-          className="min-max-1"
-          onClick={displayPlusHandler}
-        >
-         
-          <FontAwesomeIcon icon={faPlus} />
-        </Fab>}
-        {display && <Fab
-          size={buttonSize}
-          color="primary"
-          className="min-max-2"
-          onClick={displayMinusHandler}
-        >
-          <FontAwesomeIcon icon={faMinus} />
-        </Fab>}
+      <div className="info2">
+        
         {pos && display && (
           <ImageMapper
             src={link}
@@ -125,7 +85,7 @@ const MapView = (props) => {
             imgWidth={500}
             width={pWidth}
             height={pWidth}
-            onImageClick={() => setPWidth((prev) => (prev === 250 ? 500 : 250))}
+            onImageClick={() => setPWidth((prev) => (prev === 100 ? 200 : 100))}
           />
         )}
       </div>
@@ -133,4 +93,4 @@ const MapView = (props) => {
   );
 };
 
-export default MapView;
+export default MobileMap;

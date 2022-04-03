@@ -19,7 +19,7 @@ const ShowAmenities = (props) => {
           <Button
             key={index}
             variant="contained"
-            style={{ backgroundColor: "#74959A","fontSize":`${size}` }}
+            style={{ backgroundColor: "#74959A","fontSize":`${size}`}}
           >
             <div>
               <a
@@ -88,7 +88,7 @@ const ShowAmenities = (props) => {
         <ButtonGroup
           orientation="vertical"
           className={styles.grp2}
-          style={isMobile?{ top: `${depth * 1.7 +3.8}em`}:{top: `${depth * 2.4 + 6}em`}}
+          style={isMobile?{ top: `${depth * 1.7 +10}em`}:{top: `${depth * 2.4 + 6}em`}}
         >
           {nextButton}
         </ButtonGroup>
