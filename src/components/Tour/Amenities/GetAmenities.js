@@ -23,7 +23,7 @@ const GetAmenities = (props) => {
 
   return (
     <>
-    {amenities && <ShowAmenities data={amenities}/>}
+    {amenities && <ShowAmenities data={amenities} vid={props.vid}/>}
     </>
   )
 }

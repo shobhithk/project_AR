@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import {isMobile} from 'react-device-detect'
 
+
 const ShowAmenities = (props) => {
   const [display, setDisplay] = useState(false);
   const [displayNext, setDisplayNext] = useState(false);
