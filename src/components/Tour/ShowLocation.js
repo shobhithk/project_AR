@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
-import { IconButton } from "@material-ui/core";
+import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import styles from "./ShowLocation.module.css";
 
@@ -35,7 +34,7 @@ const ShowLocation = (props) => {
       {location && (
         <div className={styles.location}>
           <a href={location} target="_blank" rel="noreferrer">
-            <FontAwesomeIcon icon={faLocationArrow} />
+            <FontAwesomeIcon icon={faMapMarker} style={{color:"crimson"}} />
           </a>
         </div>
       )}

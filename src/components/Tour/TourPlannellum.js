@@ -100,7 +100,7 @@ const TourPlannellum = (props) => {
           image={isMobile ? props.mobileImage : props.imageData.image_link} //imageResult ? imageResult : props.imageData.image_link
           pitch={10}
           yaw={180}
-          hfov={isMobile ? 100 : 100}
+          hfov={isMobile ? 80 : 100}
           autoLoad
           draggable
           cssClass={styles["custom-hotspot"]}
