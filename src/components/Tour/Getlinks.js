@@ -4,7 +4,6 @@ import axios from "axios";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { isMobile } from "react-device-detect";
 
-
 const Getlinks = (props) => {
   const [embedState, setEmbedState] = useState();
   const [linkState, setLinkState] = useState();
@@ -13,20 +12,17 @@ const Getlinks = (props) => {
   const [imageId, setImageId] = useState(Object.keys(props.imageData)[0]);
   const [isComplete, setIsComplete] = useState(false);
   const [isOk, setIsOk] = useState(false);
-  console.log("isMobile: "+isMobile)
+ 
   const fetchLinkHandler = useCallback(async () => {
     try {
       const imgRes = localStorage.getItem(imageId);
       if (imgRes && !isMobile) {
-        console.log(window.innerWidth)
-        console.log("inside desktop view,accessing local storage ");
         const result = JSON.parse(imgRes);
         const imgUrl = result.link;
-        console.log("localstorage");
+
         setLinkState({ image_link: imgUrl });
         setIsOk(true);
       } else if (!isMobile) {
-        
         console.log("inside desktop view fetching image link");
         const response = await axios.get(
           "http://54.164.240.76:8000/get_image_link",
@@ -48,14 +44,11 @@ const Getlinks = (props) => {
     try {
       const imgRes = localStorage.getItem(imageId);
       if (imgRes) {
-        console.log("inside  embeddings accessing local storage ");
-        console.log("fetch embedding");
         const result = JSON.parse(imgRes);
         const imgCord = result.data;
-        console.log("localstorage");
+
         setEmbedState(imgCord);
       } else {
-        console.log("inside embeddings,fetching");
         const response = await axios.get(
           "http://54.164.240.76:8000/get_embeddings",
           {
@@ -86,7 +79,7 @@ const Getlinks = (props) => {
           method: "get",
           url: "http://54.164.240.76:8000/get_image_file1",
           responseType: "blob",
-          params: { image_id: imageId,mobile_view: true },
+          params: { image_id: imageId, mobile_view: true },
         });
 
         console.log(response.data);
