@@ -6,12 +6,11 @@ import "../../../App.css";
 const MobileMap = (props) => {
   const [pos, setPos] = useState();
   const [pWidth, setPWidth] = useState(100);
-  const [display, setDisplay] = useState(true);
   const [link,setLink] = useState(null)
 
   console.log(props);
   if(!link){
-    setLink(props.planLink.plan_link)
+    setLink(props.planLink)
   }
 
   const imageMap = useCallback(async () => {
@@ -75,7 +74,7 @@ const MobileMap = (props) => {
     <>
       <div className="info2">
         
-        {pos && display && (
+        {(
           <ImageMapper
             src={link}
             onClick={(event) => {

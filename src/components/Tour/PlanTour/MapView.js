@@ -15,7 +15,7 @@ const MapView = (props) => {
 
   console.log(props);
   if(!link){
-    setLink(props.planLink.plan_link)
+    setLink(props.planLink)
   }
 
   const imageMap = useCallback(async () => {
@@ -115,7 +115,7 @@ const MapView = (props) => {
         >
           <FontAwesomeIcon icon={faMinus} />
         </Fab>}
-        {pos && display && (
+        {(
           <ImageMapper
             src={link}
             onClick={(event) => {

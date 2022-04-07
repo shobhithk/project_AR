@@ -6,13 +6,13 @@ import MobileMap from "./MobileMap";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const GetMapData = (props) => {
-  const [isTrue, setIsTrue] = useState();
+  const [isTrue, setIsTrue] = useState(true);
   const [linkState, setLinkState] = useState();
   const [embedState, setEmbedState] = useState();
 
   const fetchLinkHandler = useCallback(async () => {
     try {
-      setIsTrue(false);
+      // setIsTrue(false);
       const response = await axios.get(
         "http://54.164.240.76:8000/get_plan_link",
         {
@@ -25,17 +25,51 @@ const GetMapData = (props) => {
           params: { plan_id: response.data.plan_id },
         }
       );
+
+      // const response3 = await axios({
+      //   method: "get",
+      //   url: "http://54.164.240.76:8000/get_plan_file",
+      //   responseType: "blob",
+      //   params: { virtual_tour_id: props.vid },
+      // });
+      // const blobUrl = window.URL.createObjectURL(new Blob([response3.data]));
+      // setLinkState(blobUrl);
+
       setEmbedState(response2.data);
-      setLinkState(response.data);
-      setIsTrue(true);
+      // setIsTrue(true);
     } catch (error) {
       console.log(error.message);
     }
   }, [props.vid]);
 
-  useEffect(() => {
+
+  const fetchFileHandler = useCallback(async () => {
+    try {
+      // setIsTrue(false);
+
+      const response3 = await axios({
+        method: "get",
+        url: "http://54.164.240.76:8000/get_plan_file",
+        responseType: "blob",
+        params: { virtual_tour_id: props.vid },
+      });
+      const blobUrl = window.URL.createObjectURL(new Blob([response3.data]));
+      setLinkState(blobUrl);
+
+      // setIsTrue(true);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [props.vid]);
+
+  // useEffect(() => {
+  //   fetchLinkHandler();
+  // }, [fetchLinkHandler]);
+
+  useEffect(()=>{
+    fetchFileHandler()
     fetchLinkHandler();
-  }, [fetchLinkHandler]);
+  },[])
 
   return (
     <>
