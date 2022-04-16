@@ -3,18 +3,14 @@ import React, { useState, useRef } from "react";
 import ListImages from "./ListImages";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import Alert from 'react-popup-alert'
+import Alert from '@material-ui/lab/Alert';
 
 function PannellumLink(props) {
   const [yaw, setYaw] = useState(0);
   const [pitch, setPitch] = useState(0);
   const [id, setId] = useState();
   const [eid, setEid] = useState();
-  const [alert, setAlert] = useState({
-    type: 'error',
-    text: 'This is a alert message',
-    show: false
-  })
+  const [alert, setAlert] = useState(false)
 
   const panImage = useRef(null);
   const co_ordinates = props.embedData.co_ordinates;
@@ -23,21 +19,7 @@ function PannellumLink(props) {
   const rollBack = () => {
     history.push("/link");
   };
-
-  function onCloseAlert() {
-    setAlert({
-      type: '',
-      text: '',
-      show: false
-    })
-  }
-  function onShowAlert(type) {
-    setAlert({
-      type: type,
-      text: 'Demo alert',
-      show: true
-    })
-  }
+  
 
   const handleSubmit = async () => {
     try {
@@ -52,7 +34,7 @@ function PannellumLink(props) {
         }
       );
       if(response.status===200){
-        alert("success")
+        setAlert(true)
       }
     } catch (err) {
       console.error(err);
@@ -61,6 +43,7 @@ function PannellumLink(props) {
 
   return (
     <>
+    {alert && <Alert onClose={() => {setAlert(false)}}>This is a success alert — check it out!</Alert>}
       <button
         className="btn btn-primary"
         style={{ margin: "10px" }}
@@ -106,21 +89,6 @@ function PannellumLink(props) {
         })}
       </Pannellum>
       <ListImages imageId={props.imageData.image_id} setId={setId} />
-      <Alert
-        header={'Success'}
-        btnText={'Close'}
-        text={alert.text}
-        type={alert.type}
-        show={alert.show}
-        onClosePress={onCloseAlert}
-        pressCloseOnOutsideClick={true}
-        showBorderBottom={true}
-        alertStyles={{}}
-        headerStyles={{}}
-        textStyles={{}}
-        buttonStyles={{}}
-      />
-    
     </>
   );
 }

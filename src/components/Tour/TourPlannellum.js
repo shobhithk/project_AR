@@ -1,11 +1,13 @@
-import React, { useRef, useEffect, useCallback, useMemo } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { Pannellum } from "pannellum-react";
 import axios from "axios";
 import SideHeader from "./SideHeader";
 import styles from "./TourPlannellum.module.css";
+import GetMapData from "./PlanTour/GetMapData";
+import GetAmenities from "./Amenities/GetAmenities";
+import { isMobile } from "react-device-detect";
 
 const TourPlannellum = (props) => {
-  let imgObj = {};
   const panImage = useRef(null);
   const co_ordinates = props.embedData.co_ordinates;
 
@@ -36,7 +38,7 @@ const TourPlannellum = (props) => {
       responseType: "blob",
       params: {
         image_id: response.data.image_id,
-        mobile_view: window.innerWidth < 780 ? true : false,
+        mobile_view: isMobile ? true : false,
       },
     });
 
@@ -71,9 +73,19 @@ const TourPlannellum = (props) => {
   }, []);
 
   return (
-    <>
+    <div style={{ position: "relative" }}>
+      
+      <GetMapData
+        vid={props.vid}
+        imageId={props.imageId}
+        changeImage={props.changeImage}
+        setIsOk={props.setIsOk}
+        setIsComplete={props.setIsComplete}
+      />
+      <GetAmenities vid={props.vid} />
       <SideHeader
         setIsOk={props.setIsOk}
+        setIsComplete={props.setIsComplete}
         images={props.images}
         imageId={props.imageId}
         changeImage={props.changeImage}
@@ -82,15 +94,11 @@ const TourPlannellum = (props) => {
         <Pannellum
           ref={panImage}
           width="100%"
-          height="94.7vh"
-          image={
-            window.innerWidth < 780
-              ? props.mobileImage
-              : props.imageData.image_link
-          } //imageResult ? imageResult : props.imageData.image_link
+          height={isMobile ? "100vh" : "100vh"}
+          image={isMobile ? props.mobileImage : props.imageData.image_link} //imageResult ? imageResult : props.imageData.image_link
           pitch={10}
           yaw={180}
-          hfov={window.innerWidth < 780 ? 100 : 500}
+          hfov={isMobile ? 80 : 100}
           autoLoad
           draggable
           cssClass={styles["custom-hotspot"]}
@@ -98,6 +106,8 @@ const TourPlannellum = (props) => {
           mouseZoom
           orientationOnByDefault={false}
           showZoomCtrl={false}
+          compass={true}
+          autoRotate={10}
         >
           {coArray.map(function (key, index) {
             counts[key] = counts[key] + 1;
@@ -108,12 +118,12 @@ const TourPlannellum = (props) => {
                 pitch={
                   counts[key] === 1
                     ? +co_ordinates[key].y
-                    : +co_ordinates[key].y + 3
+                    : +co_ordinates[key].y + 1
                 }
                 yaw={
                   counts[key] === 1
                     ? +co_ordinates[key].x
-                    : +co_ordinates[key].x + 3
+                    : +co_ordinates[key].x + 1
                 }
                 text={co_ordinates[key].coordinate_name}
                 handleClick={async (evt, args) => {
@@ -140,7 +150,7 @@ const TourPlannellum = (props) => {
           })}
         </Pannellum>
       )}
-    </>
+    </div>
   );
 };
 

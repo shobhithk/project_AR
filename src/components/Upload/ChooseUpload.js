@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const VirtualTour = (props) => {
+const ChooseUpload = (props) => {
   const cid = 1;
 
   const [vids, setVids] = useState();
@@ -40,7 +40,7 @@ const VirtualTour = (props) => {
           <button
             className="btn btn-outline-dark btl-lg"
             type="button"
-            onClick={()=>{history.push(`/${vid}&${vids[vid]}/tour`)}}
+            onClick={()=>{history.push(`/${vid}/select`)}}
             style={{ margin: "10px" }}
           >
             {vid}
@@ -51,4 +51,4 @@ const VirtualTour = (props) => {
   );
 };
 
-export default VirtualTour;
+export default ChooseUpload;

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const VirtualTour = (props) => {
+const GetMarkVid = (props) => {
   const cid = 1;
 
   const [vids, setVids] = useState();
@@ -15,7 +15,6 @@ const VirtualTour = (props) => {
           params: { customer_id: cid },
         }
       );
-      console.log(response.data)
       setVids(response.data);
     } catch (error) {
       console.log(error.message);
@@ -28,27 +27,29 @@ const VirtualTour = (props) => {
 
   const history = useHistory();
 
-
   return (
     <>
-      {vids && Object.keys(vids).map((vid,index) => 
-        <div
-          key={index}
-          className="d-grid gap-2 col-6 mx-auto"
-          style={{ fontSize: "20px" }}
-        >
-          <button
-            className="btn btn-outline-dark btl-lg"
-            type="button"
-            onClick={()=>{history.push(`/${vid}&${vids[vid]}/tour`)}}
-            style={{ margin: "10px" }}
+      {vids &&
+        Object.keys(vids).map((vid, index) => (
+          <div
+            key={index}
+            className="d-grid gap-2 col-6 mx-auto"
+            style={{ fontSize: "20px" }}
           >
-            {vid}
-          </button>
-        </div>
-      )}
+            <button
+              className="btn btn-outline-dark btl-lg"
+              type="button"
+              onClick={() => {
+                history.push(`/${vid}/mark`);
+              }}
+              style={{ margin: "10px" }}
+            >
+              {vid}
+            </button>
+          </div>
+        ))}
     </>
   );
 };
 
-export default VirtualTour;
+export default GetMarkVid;

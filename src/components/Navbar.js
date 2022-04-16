@@ -35,6 +35,12 @@ export default function Navbar() {
           <NavLink className={styles.items} activeClassName="active" to="/vid">
             VTOUR
           </NavLink>
+          <NavLink className={styles.items} activeClassName="active" to="/plan">
+            plan
+          </NavLink>
+          <NavLink className={styles.items} activeClassName="active" to="/upload">
+            upload
+          </NavLink>
         </ul>
       )}
       <button onClick={toggleNav} className={styles.btn}>

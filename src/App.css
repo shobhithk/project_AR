@@ -164,5 +164,44 @@ button:disabled:active {
   
 }
 
+.info {
+  position:absolute;
+  left: 5px;
+  top:15px;
+  border: 10px #fff;
+  background-color: #fff;
+  z-index: 10;
+  background-color: transparent;
+}
+
+.info2 {
+  position:absolute;
+  left: 5px;
+  top:2em;
+  border: 10px #fff;
+  background-color: #fff;
+  z-index: 10;
+  background-color: transparent;
+}
 
 
+img.img-mapper-img{
+  box-shadow: 3px 3px 2px #413a3a;
+ 
+}
+
+.min-max-1 {
+  position: absolute;
+  top:4em;
+  left:5px;
+  z-index: 10;
+  
+}
+
+.min-max-2 {
+  position: absolute;
+  top:4em;
+  left:10px;
+  z-index: 10;
+  
+}

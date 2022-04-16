@@ -1,30 +1,32 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import DisplayImageList from "./DisplayImageList";
-import { useLocation } from "react-router-dom";
+import { useLocation,useParams } from "react-router-dom";
 import FilteredImage from "./FilteredImage";
 
 function ListImages(props) {
   const [imageState, setImageState] = useState();
 
   const location = useLocation();
+  const params = useParams()
+  
 
   const fetchImageHandler = useCallback(async () => {
     try {
       const response = await axios.get("http://54.164.240.76:8000/get_images", {
-        params: { virtual_tour_id: 1 },
+        params: { virtual_tour_id: params.vid },
       });
       setImageState(response.data);
     } catch (error) {
       console.log(error.message);
     }
-  }, []);
+  }, [params.vid]);
 
   useEffect(() => {
     fetchImageHandler();
   }, [fetchImageHandler]);
 
-  if (location.pathname === "/link") {
+  if (location.pathname === `/${params.vid}/link`) {
     return (
       <>
         {imageState &&
@@ -37,7 +39,7 @@ function ListImages(props) {
     );
   }
 
-  if (location.pathname === "/mark") {
+  if (location.pathname === `/${params.vid}/mark`) {
     return (
       <>
         {imageState &&

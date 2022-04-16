@@ -1,0 +1,53 @@
+.area {
+  position: absolute;
+  top: 3.7em;
+  left: 16.5em;
+  z-index: 6;
+}
+
+.grp {
+  position: absolute;
+  top: 5.8em;
+  left: 16em;
+  z-index: 6;
+}
+
+.grp2 {
+  position: absolute;
+  top: 6em;
+  left: 25em;
+  z-index: 7;
+}
+
+.grp2 a {
+  text-decoration: none;
+  color: #2d4263;
+}
+
+.grp2 span {
+  display: inline;
+  font-size: 0.9em;
+}
+
+@media screen and (max-width: 900px)  {
+  .area {
+    top: 8.5em;
+    left: 0.6em;
+  }
+
+  .grp {
+    top: 12.7em;
+    left: 0.7em;
+    font-size: 0.8em;
+  }
+
+  .grp2 {
+    top: 12.7em;
+    left: 6.7em;
+  }
+
+  .grp2 span {
+    display: inline;
+    font-size: 0.9em;
+  }
+}

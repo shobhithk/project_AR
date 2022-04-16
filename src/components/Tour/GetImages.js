@@ -6,31 +6,34 @@ import { useParams } from 'react-router-dom';
 const GetImages = (props) => {
 
     const params = useParams()
+    const paramsStr = params.vid_name
+    const [vid,vid_name] =  paramsStr.split('&')
+    console.log(vid)
     const [imageState,setImageState] = useState()
 
-    useEffect(()=>{
-      const interval = setInterval(()=>{
-        Object.keys(imageState).map((imageId)=>{
-          if(localStorage.getItem(imageId)){
-            localStorage.removeItem(imageId)
-          }
-        })
-      }, 240000);
-     return () => clearInterval(interval);
-    })
+    // useEffect(()=>{
+    //   const interval = setInterval(()=>{
+    //     Object.keys(imageState).map((imageId)=>{
+    //       if(localStorage.getItem(imageId)){
+    //         localStorage.removeItem(imageId)
+    //       }
+    //     })
+    //   }, 120000);
+    //  return () => clearInterval(interval);
+    // })
     
 
 
     const fetchImageHandler = useCallback(async () => {
         try {
           const response = await axios.get("http://54.164.240.76:8000/get_images", {
-            params: { virtual_tour_id: params.vid },
+            params: { virtual_tour_id: +vid },
           });
           setImageState(response.data);
         } catch (error) {
           console.log(error.message);
         }
-      }, [params]);
+      }, [vid]);
     
       useEffect(() => {
         fetchImageHandler();
@@ -38,7 +41,7 @@ const GetImages = (props) => {
 
   return (
     <>
-    {imageState && <Getlinks imageData={imageState} />}
+    {imageState && <Getlinks imageData={imageState} vid={vid} />}
     </>
   )
 }

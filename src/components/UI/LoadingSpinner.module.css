@@ -23,3 +23,13 @@
     transform: rotate(360deg);
   }
 }
+
+.loc {
+  margin:10em 36em;
+}
+
+@media screen and (max-width:780px){
+  .loc {
+    margin:5em 2em;
+  }
+}
