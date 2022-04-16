@@ -1,8 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import styles from "./ShowLocation.module.css";
+import { Button } from "@material-ui/core";
 
 const ShowLocation = (props) => {
   const [location, setLocation] = useState();
@@ -33,9 +32,17 @@ const ShowLocation = (props) => {
     <>
       {location && (
         <div className={styles.location}>
-          <a href={location} target="_blank" rel="noreferrer">
-            <FontAwesomeIcon icon={faMapMarker} style={{color:"crimson"}} />
-          </a>
+          <Button variant="contained" color="secondary">
+            <a
+              href={location}
+              target="_blank"
+              rel="noreferrer"
+              style={{ textDecoration: "none", color: "#fff" }}
+            >
+              Take me!
+              <i className="fa-solid fa-map-location"></i>
+            </a>
+          </Button>
         </div>
       )}
     </>

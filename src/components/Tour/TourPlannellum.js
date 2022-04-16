@@ -6,7 +6,6 @@ import styles from "./TourPlannellum.module.css";
 import GetMapData from "./PlanTour/GetMapData";
 import GetAmenities from "./Amenities/GetAmenities";
 import { isMobile } from "react-device-detect";
-import ShowLocation from "./ShowLocation";
 
 const TourPlannellum = (props) => {
   const panImage = useRef(null);
@@ -91,12 +90,11 @@ const TourPlannellum = (props) => {
         imageId={props.imageId}
         changeImage={props.changeImage}
       />
-      <ShowLocation vid={props.vid}/>
       {props.isComplete && (
         <Pannellum
           ref={panImage}
           width="100%"
-          height={isMobile ? "100vh" : "95.2vh"}
+          height={isMobile ? "100vh" : "100vh"}
           image={isMobile ? props.mobileImage : props.imageData.image_link} //imageResult ? imageResult : props.imageData.image_link
           pitch={10}
           yaw={180}
@@ -120,12 +118,12 @@ const TourPlannellum = (props) => {
                 pitch={
                   counts[key] === 1
                     ? +co_ordinates[key].y
-                    : +co_ordinates[key].y + 3
+                    : +co_ordinates[key].y + 1
                 }
                 yaw={
                   counts[key] === 1
                     ? +co_ordinates[key].x
-                    : +co_ordinates[key].x + 3
+                    : +co_ordinates[key].x + 1
                 }
                 text={co_ordinates[key].coordinate_name}
                 handleClick={async (evt, args) => {

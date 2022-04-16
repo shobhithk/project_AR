@@ -2,15 +2,16 @@ import React, { useState, useCallback, useEffect } from "react";
 import ImageMapper from "react-img-mapper";
 import axios from "axios";
 import "../../../App.css";
+import ShowLocation from "../ShowLocation";
 
 const MobileMap = (props) => {
   const [pos, setPos] = useState();
   const [pWidth, setPWidth] = useState(100);
-  const [link,setLink] = useState(null)
+  const [link, setLink] = useState(null);
 
   console.log(props);
-  if(!link){
-    setLink(props.planLink)
+  if (!link) {
+    setLink(props.planLink);
   }
 
   const imageMap = useCallback(async () => {
@@ -69,24 +70,21 @@ const MobileMap = (props) => {
     }
   };
 
-
   return (
     <>
+      <ShowLocation vid={props.vid} />
       <div className="info2">
-        
-        {(
-          <ImageMapper
-            src={link}
-            onClick={(event) => {
-              linkClickHandler(event.id);
-            }}
-            map={mapData}
-            imgWidth={500}
-            width={pWidth}
-            height={pWidth}
-            onImageClick={() => setPWidth((prev) => (prev === 100 ? 200 : 100))}
-          />
-        )}
+        <ImageMapper
+          src={link}
+          onClick={(event) => {
+            linkClickHandler(event.id);
+          }}
+          map={mapData}
+          imgWidth={500}
+          width={pWidth}
+          height={pWidth}
+          onImageClick={() => setPWidth((prev) => (prev === 100 ? 200 : 100))}
+        />
       </div>
     </>
   );

@@ -5,17 +5,18 @@ import { Button, Fab } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
+import ShowLocation from "../ShowLocation";
 import "../../../App.css";
 
 const MapView = (props) => {
   const [pos, setPos] = useState();
   const [pWidth, setPWidth] = useState(250);
   const [display, setDisplay] = useState(true);
-  const [link,setLink] = useState(null)
+  const [link, setLink] = useState(null);
 
   console.log(props);
-  if(!link){
-    setLink(props.planLink)
+  if (!link) {
+    setLink(props.planLink);
   }
 
   const imageMap = useCallback(async () => {
@@ -74,7 +75,7 @@ const MapView = (props) => {
     }
   };
 
-  const buttonSize = (pWidth === 250) ? "small" : "medium";
+  const buttonSize = pWidth === 250 ? "small" : "medium";
 
   const displayPlusHandler = () => {
     if (pWidth === 250) {
@@ -97,25 +98,30 @@ const MapView = (props) => {
 
   return (
     <>
+     
+      <ShowLocation vid={props.vid} />
       <div className="info">
-        {pWidth!==500 &&  <Fab
-          size={buttonSize}
-          color="primary"
-          className="min-max-1"
-          onClick={displayPlusHandler}
-        >
-         
-          <FontAwesomeIcon icon={faPlus} />
-        </Fab>}
-        {display && <Fab
-          size={buttonSize}
-          color="primary"
-          className="min-max-2"
-          onClick={displayMinusHandler}
-        >
-          <FontAwesomeIcon icon={faMinus} />
-        </Fab>}
-        {(
+        {pWidth !== 500 && (
+          <Fab
+            size={buttonSize}
+            color="primary"
+            className="min-max-1"
+            onClick={displayPlusHandler}
+          >
+            <FontAwesomeIcon icon={faPlus} />
+          </Fab>
+        )}
+        {display && (
+          <Fab
+            size={buttonSize}
+            color="primary"
+            className="min-max-2"
+            onClick={displayMinusHandler}
+          >
+            <FontAwesomeIcon icon={faMinus} />
+          </Fab>
+        )}
+        {display && (
           <ImageMapper
             src={link}
             onClick={(event) => {
