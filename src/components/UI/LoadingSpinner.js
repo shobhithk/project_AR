@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./LoadingSpinner.module.css";
-import load from "../../Assets/Gif/load.gif";
+import load from "../../Assets/Gif/ellipse.gif";
 
 const LoadingSpinner = () => {
   // return <div className={classes.spinner}></div>;
