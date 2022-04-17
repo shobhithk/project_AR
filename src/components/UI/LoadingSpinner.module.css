@@ -25,11 +25,14 @@
 }
 
 .loc {
-  margin:10em 36em;
+  position: absolute;
+  bottom: 0.7em;
+  left:40vw;
+  
 }
 
 @media screen and (max-width:780px){
   .loc {
-    margin:5em 2em;
-  }
+    left:15vw;
+}
 }
