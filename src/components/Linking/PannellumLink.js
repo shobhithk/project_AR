@@ -88,7 +88,7 @@ function PannellumLink(props) {
           );
         })}
       </Pannellum>
-      <ListImages imageId={props.imageData.image_id} setId={setId} />
+      <ListImages imageId={props.imageData.image_id} setId={setId} vid={props.vid} />
     </>
   );
 }

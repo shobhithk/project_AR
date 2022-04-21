@@ -4,7 +4,9 @@ import axios from "axios";
 import PannellumLink from "./PannellumLink";
 
 function FetchImageDetails() {
-  const imageId = useParams();
+  const params = useParams();
+  const paramsStr = params.vid_id;
+  const [id, vid] = paramsStr.split("&");
   const [embedState, setEmbedState] = useState();
   const [linkState, setLinkState] = useState();
 
@@ -13,21 +15,21 @@ function FetchImageDetails() {
       const response = await axios.get(
         "http://54.164.240.76:8000/get_image_link",
         {
-          params: { image_id: imageId.id },
+          params: { image_id: id },
         }
       );
       setLinkState(response.data);
     } catch (error) {
       console.log(error.message);
     }
-  }, [imageId]);
+  }, [id]);
 
   const fetchEmbedHandler = useCallback(async () => {
     try {
       const response = await axios.get(
         "http://54.164.240.76:8000/get_embeddings",
         {
-          params: { image_id: imageId.id },
+          params: { image_id: id },
         }
       );
 
@@ -35,7 +37,7 @@ function FetchImageDetails() {
     } catch (error) {
       console.log(error.message);
     }
-  }, [imageId]);
+  }, [id]);
 
   useEffect(() => {
     fetchLinkHandler();
@@ -45,7 +47,7 @@ function FetchImageDetails() {
   return (
     <>
       {embedState && linkState && (
-        <PannellumLink imageData={linkState} embedData={embedState} />
+        <PannellumLink imageData={linkState} embedData={embedState} vid={vid} />
       )}
     </>
   );

@@ -5,7 +5,7 @@ function DisplayImageList(props) {
   const history = useHistory();
 
   const redirect = () => {
-    if (!props.mark) history.push(`/link/${props.imageId}`);
+    if (!props.mark) history.push(`/link/${props.imageId}&${props.vid}`);
     else history.push(`/mark/${props.imageId}`);
   };
 

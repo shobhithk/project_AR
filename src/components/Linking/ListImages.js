@@ -9,29 +9,27 @@ function ListImages(props) {
 
   const location = useLocation();
   const params = useParams()
-  
-
   const fetchImageHandler = useCallback(async () => {
     try {
       const response = await axios.get("http://54.164.240.76:8000/get_images", {
-        params: { virtual_tour_id: params.vid },
+        params: { virtual_tour_id: params.vid?params.vid:props.vid },
       });
       setImageState(response.data);
     } catch (error) {
       console.log(error.message);
     }
-  }, [params.vid]);
+  }, [params.vid,props.vid]);
 
   useEffect(() => {
     fetchImageHandler();
   }, [fetchImageHandler]);
-
+ 
   if (location.pathname === `/${params.vid}/link`) {
     return (
       <>
         {imageState &&
           Object.keys(imageState).map((key, i) => (
-            <DisplayImageList key={i} imageId={key} mark={false} >
+            <DisplayImageList key={i} imageId={key} mark={false} vid={params.vid} >
               {imageState[key]}
             </DisplayImageList>
           ))}

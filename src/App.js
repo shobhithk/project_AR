@@ -29,60 +29,62 @@ function App() {
   return (
     <>
       <Switch>
-        <Route exact path="/:vid_name/tour">
-          <GetImages />
-        </Route>
-        <div>
-          <Navbar />
-          <Route exact path="/:vid/mark">
-            <ListImages />
+        <React.Fragment>
+          <Route exact path="/:vid_name/tour">
+            <GetImages />
           </Route>
-          <Route exact path="/mark">
-            <GetMarkVid />
-          </Route>
-          <Route exact path="/link">
-            <GetLinkVid />
-          </Route>
-          <Route exact path="/mark/:id">
-            <ImageHandle />
-          </Route>
-          <Route exact path="/:vid/link">
-            <ListImages />
-          </Route>
-          <Route exact path="/vid">
-            <VirtualName />
-          </Route>
-          <Route exact path="/link/:id">
-            <FetchImageDetails />
-          </Route>
-          <Route exact path="/plan">
-            <GetPlanVid />
-          </Route>
-          <Route exact path="/:vid/plan">
-            <ChoosePlan />
-          </Route>
-          <Route exact path="/:vid/planmark">
-            <InitPlan />
-          </Route>
-          <Route exact path="/:vid/planlink">
-            <LinkPlan />
-          </Route>
-          <Route exact path="/test">
-            <Images />
-          </Route>
-          <Route exact path="/upload">
-            <ChooseUpload />
-          </Route>
-          <Route exact path="/:vid/select">
-            <Select />
-          </Route>
-          <Route exact path="/:vid/uploadimage">
-            <UploadPano />
-          </Route>
-          <Route exact path="/:vid/uploadplan">
-            <UploadPlan />
-          </Route>
-        </div>
+          <div>
+            <Navbar />
+            <Route exact path="/:vid/mark">
+              <ListImages />
+            </Route>
+            <Route exact path="/mark">
+              <GetMarkVid />
+            </Route>
+            <Route exact path="/link">
+              <GetLinkVid />
+            </Route>
+            <Route exact path="/mark/:id">
+              <ImageHandle />
+            </Route>
+            <Route exact path="/:vid/link">
+              <ListImages />
+            </Route>
+            <Route exact path="/vid">
+              <VirtualName />
+            </Route>
+            <Route exact path="/link/:vid_id">
+              <FetchImageDetails />
+            </Route>
+            <Route exact path="/plan">
+              <GetPlanVid />
+            </Route>
+            <Route exact path="/:vid/plan">
+              <ChoosePlan />
+            </Route>
+            <Route exact path="/:vid/planmark">
+              <InitPlan />
+            </Route>
+            <Route exact path="/:vid/planlink">
+              <LinkPlan />
+            </Route>
+            <Route exact path="/test">
+              <Images />
+            </Route>
+            <Route exact path="/upload">
+              <ChooseUpload />
+            </Route>
+            <Route exact path="/:vid/select">
+              <Select />
+            </Route>
+            <Route exact path="/:vid/uploadimage">
+              <UploadPano />
+            </Route>
+            <Route exact path="/:vid/uploadplan">
+              <UploadPlan />
+            </Route>
+          </div>
+        </React.Fragment>
       </Switch>
     </>
   );
