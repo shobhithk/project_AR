@@ -12,14 +12,43 @@ const Getlinks = (props) => {
   const [imageId, setImageId] = useState(Object.keys(props.imageData)[0]);
   const [isComplete, setIsComplete] = useState(false);
   const [isOk, setIsOk] = useState(false);
- 
+  const [exists, setExists] = useState(false);
+
+  function checkIfImageExists(url, callback) {
+    const img = new Image();
+    img.src = url;
+
+    if (img.complete) {
+      callback(true);
+    } else {
+      img.onload = () => {
+        callback(true);
+      };
+
+      img.onerror = () => {
+        callback(false);
+      };
+    }
+  }
+
   const fetchLinkHandler = useCallback(async () => {
     try {
       const imgRes = localStorage.getItem(imageId);
-      if (imgRes && !isMobile) {
+      if (imgRes) {
         const result = JSON.parse(imgRes);
         const imgUrl = result.link;
 
+        checkIfImageExists(imgUrl, (exists) => {
+          if (exists) {
+            setExists(true);
+          } else {
+            setExists(false);
+          }
+        });
+      }
+      if (imgRes && !isMobile && exists) {
+        const result = JSON.parse(imgRes);
+        const imgUrl = result.link;
         setLinkState({ image_link: imgUrl });
         setIsOk(true);
       } else if (!isMobile) {
@@ -38,7 +67,7 @@ const Getlinks = (props) => {
     } catch (error) {
       console.log(error.message);
     }
-  }, [imageId]);
+  }, [imageId, exists]);
 
   const fetchEmbedHandler = useCallback(async () => {
     try {
@@ -67,8 +96,20 @@ const Getlinks = (props) => {
 
   const fetchImageHandler = useCallback(async () => {
     const imgRes = localStorage.getItem(imageId);
+    if (imgRes) {
+      const result = JSON.parse(imgRes);
+      const imgUrl = result.link;
+
+      checkIfImageExists(imgUrl, (exists) => {
+        if (exists) {
+          setExists(true);
+        } else {
+          setExists(false);
+        }
+      });
+    }
     try {
-      if (imgRes && isMobile) {
+      if (imgRes && isMobile && exists) {
         const result = JSON.parse(imgRes);
         const imgUrl = result.link;
         setImageState(imgUrl);
@@ -92,7 +133,7 @@ const Getlinks = (props) => {
     } catch (error) {
       console.log(error.message);
     }
-  }, [imageId]);
+  }, [imageId,exists]);
 
   useEffect(() => {
     fetchEmbedHandler();

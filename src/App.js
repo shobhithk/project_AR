@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import axios from "axios";
 import "./App.css";
 import ImageHandle from "./components/mark/ImageHandle";
 import { Switch, Route } from "react-router-dom";
@@ -26,10 +27,23 @@ function App() {
     return "";
   };
 
+ 
+  const [ip, setIP] = useState('');
+
+  const getData = async () => {
+    const res = await axios.get('https://geolocation-db.com/json/')
+    console.log(res.data);
+    setIP(res.data.IPv4)
+  }
+  
+  useEffect( () => {
+    getData()
+  }, [])
+
   return (
     <>
       <Switch>
-        <React.Fragment>
+       
           <Route exact path="/:vid_name/tour">
             <GetImages />
           </Route>
@@ -84,7 +98,7 @@ function App() {
               <UploadPlan />
             </Route>
           </div>
-        </React.Fragment>
+        
       </Switch>
     </>
   );

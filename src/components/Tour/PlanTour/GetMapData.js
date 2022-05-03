@@ -85,6 +85,9 @@ const GetMapData = (props) => {
               setImageId={props.changeImage}
               setIsOk={props.setIsOk}
               setIsComplete={props.setIsComplete}
+              setIsMapLoaded = {props.setIsMapLoaded}
+              pWidth={props.pWidth}
+              setPWidth={props.setPWidth}
             />
           )
         ) : (
@@ -98,6 +101,9 @@ const GetMapData = (props) => {
               setImageId={props.changeImage}
               setIsOk={props.setIsOk}
               setIsComplete={props.setIsComplete}
+              setIsMapLoaded = {props.setIsMapLoaded}
+              pWidth={props.pWidth}
+              setPWidth={props.setPWidth}
             />
           )
         )

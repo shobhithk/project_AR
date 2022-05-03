@@ -10,7 +10,7 @@ import "../../../App.css";
 
 const MapView = (props) => {
   const [pos, setPos] = useState();
-  const [pWidth, setPWidth] = useState(250);
+  
   const [display, setDisplay] = useState(true);
   const [link, setLink] = useState(null);
 
@@ -47,7 +47,7 @@ const MapView = (props) => {
       id: key,
       name: co_ordinates[key].coordinate_name,
       shape: "circle",
-      coords: [co_ordinates[key].x, co_ordinates[key].y, 20],
+      coords: [co_ordinates[key].x, co_ordinates[key].y, 15],
       preFillColor: key === pos ? "#FF1818" : "#fff",
     };
     mapData.areas.push(desc);
@@ -75,33 +75,32 @@ const MapView = (props) => {
     }
   };
 
-  const buttonSize = pWidth === 250 ? "small" : "medium";
+  const buttonSize = props.pWidth === 250 ? "small" : "medium";
 
   const displayPlusHandler = () => {
-    if (pWidth === 250) {
-      setPWidth(500);
+    if (props.pWidth === 250) {
+      props.setPWidth(500);
     }
     if (!display) {
       setDisplay(true);
-      setPWidth(250);
+      props.setPWidth(250);
     }
   };
 
   const displayMinusHandler = () => {
-    if (pWidth === 250) {
+    if (props.pWidth === 250) {
       setDisplay(false);
     }
-    if (pWidth === 500) {
-      setPWidth(250);
+    if (props.pWidth === 500) {
+      props.setPWidth(250);
     }
   };
 
   return (
     <>
-     
       <ShowLocation vid={props.vid} />
       <div className="info">
-        {pWidth !== 500 && (
+        {props.pWidth !== 500 && (
           <Fab
             size={buttonSize}
             color="primary"
@@ -129,9 +128,9 @@ const MapView = (props) => {
             }}
             map={mapData}
             imgWidth={500}
-            width={pWidth}
-            height={pWidth}
-            onImageClick={() => setPWidth((prev) => (prev === 250 ? 500 : 250))}
+            width={props.pWidth}
+            height={props.pWidth}
+            onImageClick={() => props.setPWidth((prev) => (prev === 250 ? 500 : 250))}
           />
         )}
       </div>

@@ -6,7 +6,7 @@ import ShowLocation from "../ShowLocation";
 
 const MobileMap = (props) => {
   const [pos, setPos] = useState();
-  const [pWidth, setPWidth] = useState(100);
+  
   const [link, setLink] = useState(null);
 
   console.log(props);
@@ -52,6 +52,10 @@ const MobileMap = (props) => {
     imageMap();
   }, [imageMap]);
 
+  useEffect(()=>{
+    props.setPWidth(100)
+  },[])
+
   const linkClickHandler = async (eid) => {
     try {
       const response = await axios.get(
@@ -81,9 +85,9 @@ const MobileMap = (props) => {
           }}
           map={mapData}
           imgWidth={500}
-          width={pWidth}
-          height={pWidth}
-          onImageClick={() => setPWidth((prev) => (prev === 100 ? 200 : 100))}
+          width={props.pWidth}
+          height={props.pWidth}
+          onImageClick={() => props.setPWidth((prev) => (prev === 100 ? 200 : 100))}
         />
       </div>
     </>
