@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import styles from "./ShowAmenities.module.css";
 import { Button, ButtonGroup } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faCaretLeft,faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import {isMobile} from 'react-device-detect'
 
 
 const ShowAmenities = (props) => {
-  const [display, setDisplay] = useState(false);
-  const [displayNext, setDisplayNext] = useState(false);
+ 
   const [dropData, setDropData] = useState();
   const [depth, setDepth] = useState(0);
 
@@ -44,6 +43,8 @@ const ShowAmenities = (props) => {
       })
     : [];
 
+  
+
   const buttons = Object.keys(props.data).map((k, index) => {
     return (
       <Button
@@ -53,17 +54,19 @@ const ShowAmenities = (props) => {
         onClick={(key) => {
           setDropData(k);
           setDepth(index);
-          setDisplayNext((prev) => !prev);
+          props.setDisplayNext((prev) => !prev);
         }}
       >
-        {k} <FontAwesomeIcon icon={faCaretRight} style={{ margin: "3px" }} />
+       {!isMobile && <FontAwesomeIcon icon={faCaretLeft} style={{ margin: "3px" }} /> }
+       {k}
+       {isMobile && <FontAwesomeIcon icon={faCaretRight} style={{ margin: "3px" }} />}
       </Button>
     );
   });
 
   const handleClick = () => {
-    console.log("clicked");
-    setDisplay((prev) => !prev);
+  
+    props.setDisplay((prev) => !prev);
   };
 
   
@@ -80,12 +83,12 @@ const ShowAmenities = (props) => {
           amenities <FontAwesomeIcon icon={faCaretDown} />
         </Button>
       </div>
-      {display && (
+      {props.display && (
         <ButtonGroup orientation="vertical" className={styles.grp}>
           {buttons}
         </ButtonGroup>
       )}
-      {displayNext && display && dropData && (
+      {props.displayNext && props.display && dropData && (
         <ButtonGroup
           orientation="vertical"
           className={styles.grp2}

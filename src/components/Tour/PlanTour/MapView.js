@@ -21,6 +21,7 @@ const MapView = (props) => {
 
   const imageMap = useCallback(async () => {
     try {
+  
       const response = await axios.get(
         "http://54.164.240.76:8000/get_current_plan_position",
         {
@@ -30,9 +31,12 @@ const MapView = (props) => {
         }
       );
 
+    
       setPos(Object.keys(response.data)[0]);
+      
     } catch (err) {
       console.error(err);
+  
     }
   }, [props.imageId]);
 

@@ -1,21 +1,24 @@
+
 .area {
   position: absolute;
-  top: 3.7em;
-  left: 16.5em;
+  top: 3.75em;
+  right: 0.625em;
   z-index: 6;
+  width:12.5em;
 }
 
 .grp {
   position: absolute;
-  top: 5.8em;
-  left: 16em;
+  top: 5.8125em;
+  right: 0.625em;
   z-index: 6;
+  width:12.5em;
 }
 
 .grp2 {
   position: absolute;
   top: 6em;
-  left: 25em;
+  right: 13em;
   z-index: 7;
 }
 
@@ -33,17 +36,22 @@
   .area {
     top: 8.5em;
     left: 0.6em;
+    width:8em;
+    overflow-y: scroll;
   }
 
   .grp {
     top: 12.7em;
     left: 0.7em;
     font-size: 0.8em;
+    width:8em;
   }
 
   .grp2 {
     top: 12.7em;
     left: 6.7em;
+    width:8em;
+    overflow-y: scroll;
   }
 
   .grp2 span {

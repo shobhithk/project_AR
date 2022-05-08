@@ -21,9 +21,9 @@ code {
 }
 
 .sidenav {
-  width: 150px;
+  width: 200px;
   position: fixed;
-  z-index: 99;
+  z-index: 5;
   top: 100px;
   right: 10px;
   background: transparent;
@@ -32,8 +32,11 @@ code {
   overflow: hidden;
 }
 
+.sidenav .but1, .sidenav .but1:hover{
+  font-size: 15px;
+}
+
 .sidenav button {
-  padding: 6px 3px 6px 16px;
   text-decoration: none;
   font-size: 12px;
   color: #fff;
@@ -51,7 +54,7 @@ code {
 
 .sidenav button:focus,
 .sidenav button:active {
-  color: #ccc;
+ 
   border-color: #ccc;
   border: none;
   background-color: transparent;
@@ -59,15 +62,20 @@ code {
 
 @media screen and (max-width: 600px) {
   .sidenav {
-    width:100px;
-    right:5px;
-    top:25px;
+    width: 120px;
+    right: 5px;
+    top: 25px;
+    font-size: 10px;
   }
-  .sidenav a {
-    font-size: 18px;
+  .sidenav .but2 {
+    font-size: 8px;
   }
-  .sidenav button {
-    padding-right: 2px;
+  .sidenav .but1, .sidenav .but1:hover{
+    font-size: 10px;
+  }
+  .sidenav button:hover {
+    font-size: 10px;
+    color: beige;
   }
 }
 
@@ -76,8 +84,8 @@ code {
 }
 
 #textInfo .hotspot .in {
-  height:20px;
-  width:20px
+  height: 20px;
+  width: 20px;
 }
 
 #textInfo .hotspot .out {

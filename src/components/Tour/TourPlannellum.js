@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback,useState } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import { Pannellum } from "pannellum-react";
 import axios from "axios";
 import SideHeader from "./SideHeader";
@@ -8,9 +8,11 @@ import GetAmenities from "./Amenities/GetAmenities";
 import { isMobile } from "react-device-detect";
 
 const TourPlannellum = (props) => {
-
-  const [isMapLoaded,setIsMapLoaded] = useState(true)
+  const [isMapLoaded, setIsMapLoaded] = useState(true);
   const [pWidth, setPWidth] = useState(250);
+  const [display, setDisplay] = useState(false);
+  const [displayNext, setDisplayNext] = useState(false);
+  const [locDisplay, setLocDisplay] = useState(false);
 
   const panImage = useRef(null);
   const co_ordinates = props.embedData.co_ordinates;
@@ -88,15 +90,25 @@ const TourPlannellum = (props) => {
         pWidth={pWidth}
         setPWidth={setPWidth}
       />
-      {isMapLoaded && <GetAmenities vid={props.vid} />}
+       
+        <GetAmenities
+          vid={props.vid}
+          setDisplay={setDisplay}
+          setDisplayNext={setDisplayNext}
+          display={display}
+          displayNext={displayNext}
+        />
+      
       <SideHeader
         setIsOk={props.setIsOk}
         setIsComplete={props.setIsComplete}
         images={props.images}
         imageId={props.imageId}
         changeImage={props.changeImage}
+        display={locDisplay}
+        setDisplay={setLocDisplay}
       />
-      {props.isComplete &&  (
+      {props.isComplete && (
         <Pannellum
           ref={panImage}
           width="100%"
@@ -115,9 +127,11 @@ const TourPlannellum = (props) => {
           compass={true}
           autoRotate={10}
           onMouseup={() => {
-            
-            isMobile?setPWidth(100):setPWidth(250)
-           }}
+            isMobile ? setPWidth(100) : setPWidth(250);
+            setDisplay(false);
+            setDisplayNext(false);
+            setLocDisplay(false)
+          }}
         >
           {coArray.map(function (key, index) {
             counts[key] = counts[key] + 1;
@@ -128,12 +142,12 @@ const TourPlannellum = (props) => {
                 pitch={
                   counts[key] === 1
                     ? +co_ordinates[key].y
-                    : +co_ordinates[key].y
+                    : +co_ordinates[key].y + 7
                 }
                 yaw={
                   counts[key] === 1
                     ? +co_ordinates[key].x
-                    : +co_ordinates[key].x
+                    : +co_ordinates[key].x + 7
                 }
                 text={co_ordinates[key].coordinate_name}
                 handleClick={async (evt, args) => {
@@ -159,7 +173,6 @@ const TourPlannellum = (props) => {
                   }
                 }}
                 handleClickArg={{ name: { key } }}
-                
               />
             );
           })}
